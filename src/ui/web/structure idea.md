@@ -1,0 +1,10 @@
+/ui
+    /static
+        /css
+        /js
+        /images
+    /templates
+        index.html
+    __init__.py
+    app.py
+    routes.py
