@@ -2,6 +2,7 @@
 
 ''' Imports'''
 import sqlalchemy as sa
+from sqlalchemy.sql import text
 from pandas import DataFrame
 
 class SqlRetrieval:
@@ -37,7 +38,7 @@ class SqlRetrieval:
         """
         try:
             with self.engine.connect() as conn:
-                result = conn.execute(sql)
+                result = conn.execute(text(sql))
                 self.data = DataFrame(result.fetchall())
             
             return self.data
