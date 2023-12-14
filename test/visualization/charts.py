@@ -6,9 +6,11 @@ from src.visualization.bar_chart import bar_chart
 from src.visualization.scatter_plot import scatter_plot
 from src.visualization.line_chart import line_chart
 from src.visualization.pie_chart import pie_chart
+from src.visualization.calendar import calendar_heatmap
 import unittest
-from pandas import DataFrame
+from pandas import DataFrame, date_range
 import random
+import datetime
 
 
 class TestVis(unittest.TestCase):
@@ -30,6 +32,11 @@ class TestVis(unittest.TestCase):
         self.labels = [random.randint(0,5) for _ in range(len(self.data['x']))]
         self.radius = 1
         self.shadow = True
+        # Calendar
+        dates = date_range('20230101',periods=365)
+        data = [random.randint(0,5) for _ in range(len(dates))]
+        self.caledar_data = DataFrame({'data':data},index=dates)
+
     
     def test_bar_chart(self):
         ''' Test bar_chart method '''
@@ -46,6 +53,12 @@ class TestVis(unittest.TestCase):
     def test_pie_chart(self):
         '''Test pie_chart visualization'''
         pie_chart(self.data['x'],self.labels,self.title,self.figsize,self.style,self.radius, self.shadow)
+    
+    def test_calendar(self):
+        '''Test calendar_headmap visualization'''
+        calendar_heatmap(self.caledar_data, year = 2023, figsize=self.figsize, title=self.title)
+        
+    
         
 if __name__ == '__main__':
     unittest.main()
