@@ -1,7 +1,7 @@
 ''' Test script for Csvretrieval class '''
 
 import os, sys
-parent = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+parent = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(parent)
 import unittest
 from src.data_retrieval.csv_retrieval import CsvRetrieval
@@ -9,6 +9,7 @@ from pandas import read_csv,read_excel
 
 class TestCsvRetrieval(unittest.TestCase):
     ''' Test class for Csvretrieval class '''
+    @classmethod
     def setUpClass(self):
         ''' Set up class for TestCsvRetrieval '''
         self.path = 'put your path here'
