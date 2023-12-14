@@ -3,8 +3,6 @@ import os, sys
 current = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 parent = os.path.dirname(current)
 sys.path.append(parent)
-
-import sqlalchemy as sa
 import unittest
 from src.data_retrieval.sql_retrieval import SqlRetrieval
 
