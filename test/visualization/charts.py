@@ -28,6 +28,11 @@ class TestVis(unittest.TestCase):
         self.ylabel = 'y axis'
         self.color = 'green'
         self.figsize = (16,9)
+        
+        # bar chart
+        self.counts ={'counts' : [random.randint(0,10) for _ in range(10)],
+                      'categories' : [f'{i}' for i in range(10)]}
+        self.sorted = True
         # Pie chart
         self.labels = [random.randint(0,5) for _ in range(len(self.data['x']))]
         self.radius = 1
@@ -36,11 +41,10 @@ class TestVis(unittest.TestCase):
         dates = date_range('20230101',periods=365)
         data = [random.randint(0,5) for _ in range(len(dates))]
         self.caledar_data = DataFrame({'data':data},index=dates)
-
-    
+  
     def test_bar_chart(self):
         ''' Test bar_chart method '''
-        bar_chart(self.data, self.x, self.y, self.title, self.xlabel, self.ylabel, self.color, self.figsize,self.style)
+        bar_chart(self.counts,title = self.title, xlabel = self.xlabel, ylabel = self.ylabel, figsize = self.figsize, sorted = self.sorted)
     
     def test_scatter_plot(self):
         ''' Test scatter_plot method '''
