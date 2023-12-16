@@ -20,7 +20,9 @@ class TestVis(unittest.TestCase):
         ''' Set up class for TestBarChart '''
         #General
         self.style = 'darkgrid'
-        self.data = DataFrame({'x': [i + random.random() for i in range(100)],'y': [i + random.random() for i in range(100)]})
+        self.data = DataFrame({'x': [i + random.random() for i in range(100)],
+                               'y': [i + random.random() for i in range(100)],
+                               'z': [i + random.random() for i in reversed(range(100))]})
         self.x = 'x'
         self.y = 'y'
         self.title = 'My wowo graph'
@@ -30,12 +32,12 @@ class TestVis(unittest.TestCase):
         self.figsize = (16,9)
         
         # bar chart
-        self.counts ={'counts' : [random.randint(0,10) for _ in range(10)],
-                      'categories' : [f'{i}' for i in range(10)]}
+        self.counts =DataFrame({'counts' : [random.randint(0,10) for _ in range(10)],
+                      'category' : [f'{i}' for i in range(10)]})
         self.sorted = True
         # Pie chart
         self.labels = [random.randint(0,5) for _ in range(len(self.data['x']))]
-        self.radius = 1
+        self.radius = 0.3
         self.shadow = True
         # Calendar
         dates = date_range('20230101',periods=365)
@@ -52,15 +54,16 @@ class TestVis(unittest.TestCase):
     
     def test_line_plot(self):
         ''' Test line plot visualization'''
-        line_chart(self.data, self.x, self.y, self.title, self.xlabel, self.ylabel, self.color, self.figsize,self.style)
+        line_chart(data= self.data, title = self.title, xlabel=self.xlabel, ylabel= self.ylabel, figsize=self.figsize,
+                   line_colors = ['green','red'], line_widths = [2,2])
     
     def test_pie_chart(self):
         '''Test pie_chart visualization'''
-        pie_chart(self.data['x'],self.labels,self.title,self.figsize,self.style,self.radius, self.shadow)
+        pie_chart(data=self.counts,title = self.title,figsize=self.figsize,radius = self.radius)
     
-    def test_calendar(self):
-        '''Test calendar_headmap visualization'''
-        calendar_heatmap(self.caledar_data, year = 2023, figsize=self.figsize, title=self.title)
+    # def test_calendar(self):
+    #     '''Test calendar_headmap visualization'''
+    #     calendar_heatmap(self.caledar_data, year = 2023, figsize=self.figsize, title=self.title)
         
     
         

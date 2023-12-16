@@ -1,13 +1,19 @@
 '''Script to produce line chart visualizations'''
-import seaborn as sns
-import matplotlib.pyplot as plt
+from bokeh.plotting import figure,show
 
-def line_chart(data, x, y, title, xlabel, ylabel, color, figsize, style):
+def line_chart(data, title = '', xlabel = '', ylabel = '', figsize = (16,9), 
+               background_fill_color = '#ffffff', background_fill_alpha = 1.0,
+                line_colors = [], line_widths = []
+               ):
     '''Function to produce line chart visualizations'''
-    sns.set_style(style)
-    fig = sns.lineplot(x=x, y=y, data=data, color=color)
-    fig.figure.set_size_inches(figsize)
-    fig.set_title(title)
-    fig.set_xlabel(xlabel)
-    fig.set_ylabel(ylabel)
-    plt.show()
+    fig = figure(title=title, x_axis_label=xlabel, y_axis_label=ylabel, 
+                 aspect_ratio = figsize[0]/figsize[1],
+                 background_fill_color=background_fill_color, 
+                 background_fill_alpha=background_fill_alpha)
+    ys = list(data.columns)
+    ys.remove("x")
+    i = 0
+    for y in ys:
+        fig.line(data['x'], data[y], legend_label=ys[i], line_width=line_widths[i],color = line_colors[i])
+        i+=1
+    show(fig)

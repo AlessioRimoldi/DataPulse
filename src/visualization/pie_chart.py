@@ -1,16 +1,29 @@
 ''' Script to produce pie chart visualizations'''
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-import seaborn as sns
+from bokeh.plotting import figure, show
+from bokeh.palettes import Category20c
+from bokeh.transform import cumsum
+from bokeh.models import ColumnDataSource
+from math import pi
 
-def pie_chart(data,labels,title,figsize,style,radius=1,shadow = False):
-    ''''''
-    colors = plt.cm.get_cmap('hsv',len(set(labels)))
-    color_list = [mcolors.rgb2hex(colors(i)) for i in range(colors.N)]
-    sns.set_style(style)
-    fig = plt.figure(figsize=figsize)
-    plt.pie(data,labels=labels, colors=color_list, radius=radius, shadow= shadow)
-    plt.title(title)
-    plt.legend()
-    plt.show()
+def pie_chart(data,title,figsize,radius=0.4,background_fill_color = '#ffffff', background_fill_alpha = 1.0):
+    ''' Function to produce pie chart visualizations'''
     
+    ncat = len(data['category'])
+    data['colors'] = Category20c[ncat]
+    data['angle'] = data['counts']/data['counts'].sum()*2*pi
+    fig = figure(x_range = (-0.5,1.0),title = title, aspect_ratio = figsize[0]/figsize[1],
+                 tools = 'hover', tooltips = '@category: @counts', toolbar_location = None,
+                 background_fill_color = background_fill_color, background_fill_alpha = background_fill_alpha,
+                 )
+    fig.wedge(x=0, y=1, radius=radius, start_angle=cumsum('angle', include_zero=True), 
+              end_angle=cumsum('angle'), fill_color = 'colors',line_color = background_fill_color, legend_field = 'category',
+              source = data
+              )    
+    fig.axis.axis_label = None
+    fig.axis.visible = False
+    fig.grid.grid_line_color = None
+    show(fig)
+    
+def donout_chart():
+    ''' Function to produce donout chart visualizations'''
+    pass
