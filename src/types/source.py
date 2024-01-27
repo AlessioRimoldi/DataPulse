@@ -10,3 +10,9 @@ class Data():
 class Plot():
     type: str
     obj: object
+
+@dataclass
+class Tab():
+    name: str
+    plots: dict
+    
