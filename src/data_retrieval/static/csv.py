@@ -2,9 +2,10 @@ import os,sys
 parent = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 sys.path.append(parent)
 from pandas import read_csv, read_excel,DataFrame
-from src.data.source import Data
+from types.source import Data
+from data_retrieval.datasource import DataSource
 
-class CsvRetrieval:
+class Csv(DataSource):
     ''' Class used to deal with CSV files and xlsx. '''
     
     def __init__(self, path_to_file) -> None:

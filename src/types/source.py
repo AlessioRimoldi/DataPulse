@@ -5,3 +5,8 @@ from pandas import DataFrame
 class Data():
     source: str
     data: DataFrame
+
+@dataclass
+class Plot():
+    type: str
+    obj: object

@@ -1,11 +1,16 @@
 ''' This file contains the engine to connect and retrieve data from a database using SQL. '''
 
 ''' Imports'''
+import os,sys
+parent = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+sys.path.append(parent)
+from types.source import Data
 import sqlalchemy as sa
 from sqlalchemy.sql import text
 from pandas import DataFrame
+from data_retrieval.datasource import DataSource
 
-class SqlRetrieval:
+class Sql(DataSource):
     """
     This class is used to retrieve data from a database using SQL.
     """
@@ -39,7 +44,7 @@ class SqlRetrieval:
         try:
             with self.engine.connect() as conn:
                 result = conn.execute(text(sql))
-                self.data = DataFrame(result.fetchall())
+                self.data = Data(f'SQL DB : {self.db_name}',DataFrame(result.fetchall()))
             
             return self.data
         except:
