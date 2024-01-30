@@ -6,13 +6,3 @@ class Data():
     source: str
     data: DataFrame
 
-@dataclass
-class Plot():
-    type: str
-    obj: object
-
-@dataclass
-class Tab():
-    name: str
-    plots: dict
-    
