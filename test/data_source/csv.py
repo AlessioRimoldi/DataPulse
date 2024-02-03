@@ -4,7 +4,7 @@ import os, sys
 parent = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(parent)
 import unittest
-from src.data_retrieval.csv_retrieval import CsvRetrieval
+from src.datasource.static.csv import Csv
 from pandas import read_csv,read_excel
 
 class TestCsvRetrieval(unittest.TestCase):
@@ -13,7 +13,7 @@ class TestCsvRetrieval(unittest.TestCase):
     def setUpClass(self):
         ''' Set up class for TestCsvRetrieval '''
         self.path = 'put your path here'
-        self.CsvRetrieval = CsvRetrieval(self.path)
+        self.CsvRetrieval = Csv(self.path)
         self.extension = self.path.split('/')[-1].split('.')[-1]
         self.data = read_csv(self.path) if self.extension == 'csv' else read_excel(self.path)
     

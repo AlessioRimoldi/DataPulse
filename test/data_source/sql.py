@@ -4,7 +4,7 @@ current = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 parent = os.path.dirname(current)
 sys.path.append(parent)
 import unittest
-from src.data_retrieval.sql_retrieval import SqlRetrieval
+from src.datasource.static.sql import Sql
 
 
 class TestSqlRetrieval(unittest.TestCase):
@@ -17,7 +17,7 @@ class TestSqlRetrieval(unittest.TestCase):
         self.host = 'localhost'
         self.port = 5432
 
-        self.SqlRetrieval = SqlRetrieval(self.dialect, self.db_name, self.user, self.password, self.host, self.port)    
+        self.SqlRetrieval = Sql(self.dialect, self.db_name, self.user, self.password, self.host, self.port)    
         
     def test_get_data(self):
         sql = "select * from customers limit 100;"

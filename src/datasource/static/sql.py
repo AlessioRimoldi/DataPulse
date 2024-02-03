@@ -4,13 +4,14 @@
 import os,sys
 parent = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 sys.path.append(parent)
-from types.source import Data
+from data.staticdata import StaticData
+from datasource.staticsource import StaticSource
+
 import sqlalchemy as sa
 from sqlalchemy.sql import text
 from pandas import DataFrame
-from data_retrieval.datasource import DataSource
 
-class Sql(DataSource):
+class Sql(StaticSource):
     """
     This class is used to retrieve data from a database using SQL.
     """
@@ -44,7 +45,7 @@ class Sql(DataSource):
         try:
             with self.engine.connect() as conn:
                 result = conn.execute(text(sql))
-                self.data = Data(f'SQL DB : {self.db_name}',DataFrame(result.fetchall()))
+                self.data = StaticData(f'SQL DB : {self.db_name}',DataFrame(result.fetchall()))
             
             return self.data
         except:
