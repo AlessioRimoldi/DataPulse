@@ -1,2 +1,2 @@
-# data_visualization_tool
+# Viz
 Source agnostic data visuzlization tool
