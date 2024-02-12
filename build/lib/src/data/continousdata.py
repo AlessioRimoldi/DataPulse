@@ -5,5 +5,3 @@ class ContinousData(Data):
 
     def update(self):
         pass
-
-    
