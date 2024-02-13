@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling","bokeh","calmap","numpy","pandas","matplotlib","scikit-learn","scipy","seaborn","sqlalchemy"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[project]
+name = "datapulse"
+version = "0.0.1"
+authors = [
+  { name="Alessio Rimoldi", email="alessio.rimoldi.work@gmail.com" },
+]
+description = "Agnostic source data visualization tool"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3.10",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/AlessioRimoldi/DataPulse"
+Issues = "https://github.com/AlessioRimoldi/DataPulse/issues"
