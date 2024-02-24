@@ -3,7 +3,7 @@ requires = ["hatchling","bokeh","calmap","numpy","pandas","matplotlib","scikit-l
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src"]
+packages = ["src/datapulse"]
 
 [project]
 name = "datapulse"
